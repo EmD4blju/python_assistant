@@ -5,6 +5,7 @@ import os
 
 config = env.dotenv_values("credentials/.env")
 
+# This Google Cloud s2t is a monumental shit.
 def speech_to_text(file_name) -> str:
     client = speech.SpeechClient.from_service_account_file(config.get('S2T_PATH'))
 
@@ -17,7 +18,9 @@ def speech_to_text(file_name) -> str:
     )
     return response.results[0].alternatives[0].transcript
 
-def text_to_speech(text, param):
+# This one is even bigger (probably the hugest shit I've seen)
+# Can someone tell me why credential application differs between those APIs?
+def text_to_speech(text, file_no):
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = config.get("TTS_PATH")
     client = texttospeech.TextToSpeechClient()
 
@@ -34,7 +37,9 @@ def text_to_speech(text, param):
         }
     )
 
-
-    with open(f'sounds/assistant_log/assistant_sound_{param}.wav', 'wb') as sound_file:
+    # At least this one is cool. Uses flush() function on a file to flush the previous shit to the sewers.
+    with open(f'sounds/assistant_log/assistant_sound_{file_no}.wav', 'wb') as sound_file:
         sound_file.write(response.audio_content)
         sound_file.flush()
+
+# GOOGLE DOCUMENTATION IS FULL OF NOTHING
