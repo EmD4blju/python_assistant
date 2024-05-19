@@ -1,8 +1,5 @@
 import speech_recognition as sr
-
-# This one listens properly for the microphone input.
-# Why even bother if this data goes to Google Cloud speech recognition?
-def record_audio() -> sr.AudioData:
+def record_audio() -> sr.AudioData: # [Notice]: function records user audio
     with sr.Microphone() as source:
         print("[ASSISTANT]: Listening...")
         audio = sr.Recognizer().listen(source)
