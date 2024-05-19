@@ -1,12 +1,8 @@
 import asyncio
-import sys
 import wave
 import playsound as ps
-import audio_recorder as ar
-import wikipedia_bs4 as wbs4
-import weather_ops as wo
-import speech_ops
-import gpt_ops
+from assistant_tools import audio_recorder as ar, wikipedia_bs4 as wbs4, gpt_ops, speech_ops, weather_ops as wo
+
 
 def write_wav_frames(wav_frames) -> None: # [Notice]: function writes .wav frames into a file
     with wave.open('sounds/my_sound.wav', "wb") as sound_file:

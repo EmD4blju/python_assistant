@@ -3,7 +3,7 @@ from google.cloud import texttospeech
 import dotenv as env
 import os
 
-config = env.dotenv_values("credentials/.env")
+config = env.dotenv_values("../credentials/.env")
 
 def speech_to_text(file_name) -> str: # [Notice]: function converts speech to text
     client = speech.SpeechClient.from_service_account_file(config.get('S2T_PATH'))

@@ -1,7 +1,7 @@
 import openai
 import dotenv as env
 
-config = env.dotenv_values("credentials/.env")
+config = env.dotenv_values("../credentials/.env")
 openai.api_key = config.get("API_KEY")
 
 # TODO: Upgrade this fucking prompt, cause the model is stupid
