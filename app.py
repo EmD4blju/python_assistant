@@ -1,4 +1,5 @@
 import asyncio
+import sys
 import wave
 import playsound as ps
 import audio_recorder as ar
@@ -26,7 +27,7 @@ async def perform_chat() -> str: # [Notice]: function performs a communication w
     response = gpt_ops.get_completion(prompt)
     print('[ASSISTANT]: ', response, sep='\t')
     if response == 'stop':
-        return
+        return 'stop'
     elif response.startswith('check_wiki'):
         response = wbs4.search_wikipedia(response.split(' ')[1]) # TODO: needs json
     elif response.startswith('check_weather'):
@@ -34,13 +35,14 @@ async def perform_chat() -> str: # [Notice]: function performs a communication w
     return response
 
 async def run() -> None: # main method of the assistant app
-    file_no = 0
+    file_no = 0 # TODO: Can it be placed somewhere else?
     while True:
-        file_no += 1
+        file_no += 1 # TODO: Can it be placed somewhere else?
         try:
             wav_frames = ar.record_audio().get_wav_data() # records audio
             write_wav_frames(wav_frames) # writes recorded audio to a file
             response = await perform_chat() # provides response from performed chat
+            if response == 'stop': return
             speech_ops.text_to_speech(response, file_no) # converts response to audio, writes to a file of file_no
             ps.playsound(f"sounds/assistant_log/assistant_sound_{file_no}.wav") # uses an example of file of file_no
         except:
