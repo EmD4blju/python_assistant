@@ -3,7 +3,7 @@ from google.cloud import texttospeech
 import dotenv as env
 import os
 
-config = env.dotenv_values("../credentials/.env")
+config = env.dotenv_values("credentials/.env")
 
 def speech_to_text(file_name) -> str: # [Notice]: function converts speech to text
     client = speech.SpeechClient.from_service_account_file(config.get('S2T_PATH'))
@@ -16,7 +16,7 @@ def speech_to_text(file_name) -> str: # [Notice]: function converts speech to te
     return response.results[0].alternatives[0].transcript
 
 def text_to_speech(text, file_no): # [Notice]: function converts text to speech
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = config.get("TTS_PATH")
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = config.get('TTS_PATH')
     client = texttospeech.TextToSpeechClient()
     response = client.synthesize_speech(
         request={
@@ -32,4 +32,3 @@ def text_to_speech(text, file_no): # [Notice]: function converts text to speech
     )
     with open(f'sounds/assistant_log/assistant_sound_{file_no}.wav', 'wb') as sound_file:
         sound_file.write(response.audio_content)
-        sound_file.flush()

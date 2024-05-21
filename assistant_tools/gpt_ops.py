@@ -1,7 +1,7 @@
 import openai
 import dotenv as env
 
-config = env.dotenv_values("../credentials/.env")
+config = env.dotenv_values("credentials/.env")
 openai.api_key = config.get("API_KEY")
 
 # TODO: Upgrade this fucking prompt, cause the model is stupid
@@ -14,7 +14,7 @@ initial_prompt = f"""
     Jeśli nic nie pasuje, po prostu porozmawiaj na ten temat z użytkownikiem
     Oto kilka zasad, których musisz przestrzegać:
       - Jeśli użytkownik zapyta o informacje na jakiś temat, odpowiedz w następującym formacie:
-            check_wiki pełny_link;
+            check_wiki pełny_link
       - Pamiętaj, aby wkleić pełny link do Wikipedii, tak aby był zgodny z prośbą użytkownika.
       - Po spacji należy podać wyłącznie link dla użytkownika.
       - Również jeśli chodzi o pogodę, pamiętaj o wpisaniu właściwej lokalizacji, wystarczy tylko miasto.

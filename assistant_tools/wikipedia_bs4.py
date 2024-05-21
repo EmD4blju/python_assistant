@@ -1,7 +1,6 @@
 import bs4
 import requests as req
 import re
-
 def search_wikipedia(wikipedia_link:str) -> str: # [Notice]: function searches Wikipedia (web-scrapping) for content
     request = req.get(wikipedia_link) # sends HTTP GET request for HTML
     soup = bs4.BeautifulSoup(request.content, 'html.parser') # initiates HTML parser
