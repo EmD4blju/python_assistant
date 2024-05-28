@@ -10,7 +10,7 @@ def speech_to_text(file_name) -> str: # [Notice]: function converts speech to te
     with open(file_name, 'rb') as file:
         wav_data = file.read()
     response = client.recognize(
-        config=speech.RecognitionConfig(language_code='pl-PL'), # TODO: update that config (might work better)
+        config=speech.RecognitionConfig(language_code='pl-PL'),
         audio=speech.RecognitionAudio(content=wav_data)
     )
     return response.results[0].alternatives[0].transcript
