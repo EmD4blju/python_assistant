@@ -2,7 +2,8 @@ import json
 import requests
 import dotenv as env
 
-config = env.dotenv_values("credentials/.env")
+config = env.dotenv_values('credentials/.env'
+                           )
 
 
 def get_weather(location: str) -> str:  # [Notice]: function gets current weather in the given location
@@ -15,9 +16,9 @@ def get_weather(location: str) -> str:  # [Notice]: function gets current weathe
 def get_weather_info(weather_dict: dict) -> str:
     weather_info = weather_dict['main']
     return f"""
-Temperatura: {weather_info['temp']} \u00b0Celsjusza,
+Temperatura: {weather_info['temp']} \u00b0C,
 Ciśnienie: {weather_info['pressure']} hPa,
-Wilgotność: {weather_info['humidity']}
+Wilgotność: {weather_info['humidity']}%
 """
 
 
